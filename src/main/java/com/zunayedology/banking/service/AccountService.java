@@ -1,0 +1,7 @@
+package com.zunayedology.banking.service;
+
+import com.zunayedology.banking.dto.AccountDto;
+
+public interface AccountService {
+    AccountDto createAccount(AccountDto accountDto);
+}
