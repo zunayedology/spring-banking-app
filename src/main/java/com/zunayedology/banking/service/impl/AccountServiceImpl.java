@@ -39,6 +39,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public AccountDto updateAccount(Long id, AccountDto accountDto) {
+        Account existingAccount = accountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+
+        existingAccount.setAccountHolderName(accountDto.getAccountHolderName());
+        existingAccount.setBalance(accountDto.getBalance());
+
+        Account updatedAccount = accountRepository.save(existingAccount);
+        return AccountMapper.mapToAccountDto(updatedAccount);
+    }
+
+    @Override
     public AccountDto deposit(Long id, double amount) {
         Account account = accountRepository
                 .findById(id)

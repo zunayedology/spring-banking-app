@@ -25,6 +25,13 @@ public class AccountController {
         return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
     }
 
+    // Update account REST API
+    @PutMapping("/{id}")
+    public ResponseEntity<AccountDto> updateAccount(@PathVariable Long id, @RequestBody AccountDto accountDto) {
+        AccountDto updatedAccount = accountService.updateAccount(id, accountDto);
+        return ResponseEntity.ok(updatedAccount);
+    }
+
     // Get account REST API
     @GetMapping("/{id}")
     public ResponseEntity<AccountDto> getAccountById(@PathVariable Long id) {
