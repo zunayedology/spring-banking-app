@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
 
 // eslint-disable-next-line
 //debugger;
-export const getAccounts = () => axiosInstance.get('/accounts').catch(error => console.log(error));
+export const getAccounts = () => axiosInstance.get('/accounts');
 export const createAccount = (account) => axiosInstance.post('/accounts', account);
 export const updateAccount = (id, account) => axiosInstance.put(`/accounts/${id}`, account);
 export const deleteAccount = (id) => axiosInstance.delete(`/accounts/${id}`);
@@ -138,13 +138,21 @@ const AccountTable = () => {
   };
 
   const columns = [
-    {title: 'ID', dataIndex: 'id', key: 'id'},
+    {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id'
+    },
     {
       title: 'Account Holder Name',
       dataIndex: 'accountHolderName',
       key: 'accountHolderName',
     },
-    {title: 'Balance', dataIndex: 'balance', key: 'balance'},
+    {
+        title: 'Balance',
+        dataIndex: 'balance',
+        key: 'balance'
+    },
     {
       title: 'Deposit/Withdraw',
       key: 'actions',

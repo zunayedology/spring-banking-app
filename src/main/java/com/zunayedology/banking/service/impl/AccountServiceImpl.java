@@ -5,7 +5,11 @@ import com.zunayedology.banking.entity.Account;
 import com.zunayedology.banking.mapper.AccountMapper;
 import com.zunayedology.banking.repository.AccountRepository;
 import com.zunayedology.banking.service.AccountService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.View;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +25,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto createAccount(AccountDto accountDto) {
+        if (accountDto.getAccountHolderName().charAt(0) != 'O') {
 
-        Account account = AccountMapper.mapToAccount(accountDto);
-        Account saveAccount = accountRepository.save(account);
+            Account account = AccountMapper.mapToAccount(accountDto);
+            Account saveAccount = accountRepository.save(account);
 
-        return AccountMapper.mapToAccountDto(saveAccount);
+            return AccountMapper.mapToAccountDto(saveAccount);
+        }
+         return new AccountDto();
+//         throw new ResponseStatusException(new AccountDto(), HttpStatus.NOT_FOUND);
     }
 
     @Override
